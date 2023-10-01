@@ -25,7 +25,7 @@ export const Home = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [PATIENT_URL]);
 
   return (
     <>

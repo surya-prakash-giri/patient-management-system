@@ -26,6 +26,7 @@ export const AnalyzeData = () => {
         setLoading(false);
       });
   }, [patientId]); // Include patientId as a dependency
+  
   return (
     <>
       <div>

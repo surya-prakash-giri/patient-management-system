@@ -34,37 +34,37 @@ export const AddPatient = () => {
 
     return (
         <>
-        <div className="container">
-            <h2>Create Patient:</h2>
-            <form onSubmit={handleSubmit}>
-            First Name:
-            <input
-                type="text"
-                name="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                align="left"
-            />
-            Last Name:
-            <input
-                type="text"
-                name="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                align="left"
-            />
-            Age:
-            <input
-                type="text"
-                name="age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                align="left"
-            />
-            <button type="submit">Confirm</button>
-            </form>
-            <Link to={"/"}>Go Back</Link>
-        </div>
+            <div className="container">
+                <h2>Create Patient:</h2>
+                <form onSubmit={handleSubmit}>
+                First Name:
+                <input
+                    type="text"
+                    name="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    align="left"
+                />
+                Last Name:
+                <input
+                    type="text"
+                    name="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    align="left"
+                />
+                Age:
+                <input
+                    type="text"
+                    name="age"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    align="left"
+                />
+                <button type="submit">Confirm</button>
+                </form>
+                <Link to={"/"}>Go Back</Link>
+            </div>
         </>
     );
 };
