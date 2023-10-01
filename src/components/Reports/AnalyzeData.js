@@ -5,16 +5,18 @@ import { Link, useParams } from "react-router-dom";
 import { RowCreator } from "../Home/RowCreator";
 
 export const AnalyzeData = () => {
+  // constants
+  const BASE_URL = "http://localhost:8080/";
+  const CLINICAL_URL = "clinicalservices/api/"
+  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients`;
+
   const [data, setData] = useState([]);
   const { patientId } = useParams();
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(
-        "http://localhost:8080/clinicalservices/api/patients/analyze/" +
-          patientId
-      )
+      .get(`${PATIENT_URL}/analyze/${patientId}`)
       .then((res) => {
         setData(res.data);
         setLoading(false);

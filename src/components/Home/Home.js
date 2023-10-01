@@ -7,7 +7,7 @@ export const Home = () => {
   // constants
   const BASE_URL = "http://localhost:8080/";
   const CLINICAL_URL = "clinicalservices/api/"
-  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients/`;
+  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients`;
 
   const [patientData, setPatientData] = useState([]);
   const [isLoading, setLoading] = useState(true);
