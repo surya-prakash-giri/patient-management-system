@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { RowCreator } from "../Home/RowCreator";
+import { RowCreator } from "./RowCreator";
 
 export const AnalyzeData = () => {
   // constants
@@ -21,7 +21,7 @@ export const AnalyzeData = () => {
       .then((res) => {
         setData(res.data);
         setLoading(false);
-        console.log("Got Analyze data successfully.");
+        console.log("Got Analyze data successfully.", res.data);
       })
       .catch((error) => {
         console.error("Error fetching patient data: ", error);
