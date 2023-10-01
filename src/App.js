@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Toast, ToastContainer } from "react-toastify/dist/components";
+import { ToastContainer, toast } from "react-toastify";
 
 import { Home } from "./components/Home/Home";
 import { CollectClinicals } from "./components/Clinicals/CollectClinicals";
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer autoClose={2000} 
-        position = {Toast.POSITION.BOTTOM_CENTER}/>
+        position = {toast.POSITION.BOTTOM_CENTER}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
