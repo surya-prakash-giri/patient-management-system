@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState, useParams, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export const CollectClinicals = () => {
   // constants
@@ -38,9 +39,9 @@ export const CollectClinicals = () => {
         console.error(err);
       });
   };
+  
   return (
     <>
-      return (
       <div>
         <h2>Patient Details:</h2>
         First Name: {!isLoading ? patientData.firstName : ""}
@@ -68,7 +69,6 @@ export const CollectClinicals = () => {
           <button onClick={handleSubmit.bind(this)}>Confirm</button>
         </form>
       </div>
-      )
     </>
   );
 };

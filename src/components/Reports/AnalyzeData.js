@@ -25,7 +25,8 @@ export const AnalyzeData = () => {
         console.error("Error fetching patient data: ", error);
         setLoading(false);
       });
-  }, [patientId]); // Include patientId as a dependency
+  }, [PATIENT_URL, patientId]); // Include patientId as a dependency
+  
   return (
     <>
       <div>
