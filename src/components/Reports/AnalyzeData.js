@@ -13,10 +13,11 @@ export const AnalyzeData = () => {
   const [data, setData] = useState([]);
   const { patientId } = useParams();
   const [isLoading, setLoading] = useState(true);
+  const ANALYZE_URL = `${PATIENT_URL}/analyze/${patientId}`;
 
   useEffect(() => {
     axios
-      .get(`${PATIENT_URL}/analyze/${patientId}`)
+      .get(ANALYZE_URL)
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -26,7 +27,7 @@ export const AnalyzeData = () => {
         console.error("Error fetching patient data: ", error);
         setLoading(false);
       });
-  }, [PATIENT_URL, patientId]); // Include patientId as a dependency
+  }, [ANALYZE_URL]);
   
   return (
     <>
