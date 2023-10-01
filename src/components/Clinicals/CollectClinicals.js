@@ -21,7 +21,7 @@ export const CollectClinicals = () => {
         setPatientData(res.data);
         setLoading(false);
       });
-  });
+  }, [PATIENT_URL, patientId]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
