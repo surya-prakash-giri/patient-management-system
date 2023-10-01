@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export const CollectClinicals = () => {
   // constants
@@ -31,9 +31,10 @@ export const CollectClinicals = () => {
       componentValue: componentValue,
     };
     axios
-      .post(`${BASE_URL}${CLINICAL_URL}clinicals/`, requestData)
+      .post(`${BASE_URL}${CLINICAL_URL}clinicals`, requestData)
       .then((res) => {
-        console.log("Patient data added successfully", res);
+        console.log("Patient data updated successfully", res);
+        <Navigate to="/" replace={true} />
       })
       .catch((err) => {
         console.error(err);

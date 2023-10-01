@@ -20,6 +20,7 @@ export const AnalyzeData = () => {
       .then((res) => {
         setData(res.data);
         setLoading(false);
+        console.log("Got Analyze data successfully.");
       })
       .catch((error) => {
         console.error("Error fetching patient data: ", error);
