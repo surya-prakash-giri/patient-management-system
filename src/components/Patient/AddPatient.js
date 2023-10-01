@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 export const AddPatient = () => {
     // constants
@@ -26,8 +25,6 @@ export const AddPatient = () => {
 
         try {
             const response = await axios.post(PATIENT_URL, requestData);
-            toast.success('Patient added successfully');
-            <ToastContainer/>
             console.log("Patient Added", response);
             <Navigate to="/" replace={true} />
         } catch (error) {
