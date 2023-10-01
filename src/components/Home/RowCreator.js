@@ -5,7 +5,6 @@ export const RowCreator = (props) => {
   const patient = props.item;
   return (
     <>
-      return (
       <tr>
         <td>{patient.id}</td>
         <td>{patient.firstName}</td>
@@ -18,7 +17,6 @@ export const RowCreator = (props) => {
           <Link to={"/analyze/" + patient.id}>Analyze</Link>
         </td>
       </tr>
-      );
     </>
   );
 };
