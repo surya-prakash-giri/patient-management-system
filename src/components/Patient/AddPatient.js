@@ -1,32 +1,31 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const AddPatient = () => {
     // constants
-    const BASE_URL = "http://localhost:8080/";
-    const CLINICAL_URL = "clinicalservices/api/"
-    const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients`;
+    const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080/";;
+    const CLINICAL_URL = process.env.REACT_APP_PATIENT_BASE || "clinicals/patients";
+    const PATIENT_URL = `${REACT_APP_BASE_URL}${CLINICAL_URL}`;
 
     // Forms data
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState(0);
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const requestData = {
-        firstName,
-        lastName,
-        age,
+            firstName,
+            lastName,
+            age,
         };
-        
 
         try {
             const response = await axios.post(PATIENT_URL, requestData);
             console.log("Patient Added", response);
-            <Navigate to="/" replace={true} />
+            navigate('/', { replace: true })
         } catch (error) {
             console.error("Error adding patient: ", error);
         }

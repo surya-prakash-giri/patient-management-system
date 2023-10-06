@@ -7,7 +7,7 @@ export const RowCreator = (props) => {
         <div>
             <table align="center">
             <tr>
-                <td>
+                <td colspan="3">
                 <b>{eachEntry.componentName}</b>
                 </td>
             </tr>

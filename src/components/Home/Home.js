@@ -5,9 +5,9 @@ import { RowCreator } from "./RowCreator";
 
 export const Home = () => {
   // constants
-  const BASE_URL = "http://localhost:8080/";
-  const CLINICAL_URL = "clinicalservices/api/"
-  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients`;
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080/";;
+  const CLINICAL_URL = process.env.REACT_APP_PATIENT_BASE || "clinicals/patients"
+  const PATIENT_URL = `${REACT_APP_BASE_URL}${CLINICAL_URL}`;
 
   const [patientData, setPatientData] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -16,8 +16,9 @@ export const Home = () => {
     // Use an async function for cleaner code
     async function fetchData() {
       try {
-        const response = await axios.get(PATIENT_URL);
-        setPatientData(response.data);
+        const { data } = await axios.get(PATIENT_URL);
+        setPatientData(data.patients);
+        console.log(data.patients);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching patient data:", error);
@@ -44,8 +45,8 @@ export const Home = () => {
           </thead>
           <tbody>
             {!isLoading ? (
-              patientData.map((patient) => (
-                <RowCreator key={patient.id} item={patient} />
+              patientData.map((patient, idx) => (
+                <RowCreator key={patient._id.toString()} item={patient} idx={idx} />
               ))
             ) : (
               <tr>

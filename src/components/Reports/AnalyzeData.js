@@ -6,9 +6,9 @@ import { RowCreator } from "./RowCreator";
 
 export const AnalyzeData = () => {
   // constants
-  const BASE_URL = "http://localhost:8080/";
-  const CLINICAL_URL = "clinicalservices/api/"
-  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients`;
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080/";
+  const CLINICAL_URL = process.env.REACT_APP_PATIENT_BASE || "clinicals/patients";
+  const PATIENT_URL = `${REACT_APP_BASE_URL}${CLINICAL_URL}`;
 
   const [data, setData] = useState([]);
   const { patientId } = useParams();
@@ -19,7 +19,7 @@ export const AnalyzeData = () => {
     axios
       .get(ANALYZE_URL)
       .then((res) => {
-        setData(res.data);
+        setData(res.data.patient);
         setLoading(false);
         console.log("Got Analyze data successfully.", res.data);
       })
@@ -41,7 +41,7 @@ export const AnalyzeData = () => {
         <h2>Clinical Report:</h2>
         {!isLoading ? (
           data.clinicalData.map((eachEntry) => (
-            <RowCreator key={eachEntry.id} item={eachEntry} />
+            <RowCreator key={eachEntry._id.toString()} item={eachEntry} />
           ))
         ) : (
           <p>Loading clinical data...</p>

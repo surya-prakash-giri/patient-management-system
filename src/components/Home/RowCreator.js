@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 
 export const RowCreator = (props) => {
   const patient = props.item;
+  console.log(patient);
   return (
     <>
       <tr>
-        <td>{patient.id}</td>
+        <td>{props.idx}</td>
         <td>{patient.firstName}</td>
         <td>{patient.lastName}</td>
         <td>{patient.age}</td>
         <td>
-          <Link to={"/patientDetails/" + patient.id}>Add Data</Link>
+          <Link to={"/patientDetails/" + patient._id.toString()}>Add Data</Link>
         </td>
         <td>
-          <Link to={"/analyze/" + patient.id}>Analyze</Link>
+          <Link to={"/analyze/" + patient._id.toString()}>Analyze</Link>
         </td>
       </tr>
     </>

@@ -1,27 +1,28 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const CollectClinicals = () => {
-  // constants
-  const BASE_URL = "http://localhost:8080/";
-  const CLINICAL_URL = "clinicalservices/api/"
-  const PATIENT_URL = `${BASE_URL}${CLINICAL_URL}patients/`;
-
   const { patientId } = useParams();
+  // constants
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8080/";;
+  const CLINICAL_URL = process.env.REACT_APP_PATIENT_BASE || "clinicals/patients";
+  const PATIENT_URL = `${REACT_APP_BASE_URL}${CLINICAL_URL}/${patientId}`;
+
   const [patientData, setPatientData] = useState({});
   const [componentName, setComponentName] = useState("");
   const [componentValue, setComponentValue] = useState("");
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(PATIENT_URL + patientId)
+      .get(PATIENT_URL)
       .then((res) => {
-        setPatientData(res.data);
+        setPatientData(res.data.patient);
         setLoading(false);
       });
-  }, [PATIENT_URL, patientId]);
+  }, [PATIENT_URL]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,10 +32,10 @@ export const CollectClinicals = () => {
       componentValue: componentValue,
     };
     axios
-      .post(`${BASE_URL}${CLINICAL_URL}clinicals`, requestData)
+      .post(`${REACT_APP_BASE_URL}${CLINICAL_URL}/AddData`, requestData)
       .then((res) => {
         console.log("Patient data updated successfully", res);
-        <Navigate to="/" replace={true} />
+        navigate('/', { replace: true })
       })
       .catch((err) => {
         console.error(err);
