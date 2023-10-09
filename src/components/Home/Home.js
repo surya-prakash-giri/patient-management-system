@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import RecordTable from "./RecordTable";
@@ -15,6 +15,8 @@ export const Home = () => {
 
   const [patientData, setPatientData] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [reload, doReload] = useState(false);
+  const id = useId();
 
   useEffect(() => {
     // Use an async function for cleaner code
@@ -30,15 +32,26 @@ export const Home = () => {
       }
     }
     fetchData();
-  }, [PATIENT_URL]);
+  }, [PATIENT_URL, reload]);
+
+  const removePatient = async(patientId) => {
+    try {
+      const { data } = await axios.delete(`${PATIENT_URL}/${patientId}`);
+      doReload(true);
+      console.log('Deleted Data', data);
+    } catch (error) {
+      console.error("Error fetching patient data:", error);
+      setLoading(false);
+    }
+  }
 
   return (
     <Paper sx={{padding: '32px'}}>
-      <Box sx={{ width: "100%", maxWidth: 500 }}>
+      <Box sx={{ width: "100%", maxWidth: 'lg' }}>
         <Typography variant="h2" gutterBottom>
           Patients
         </Typography>
-        {!isLoading ? <RecordTable items={patientData} /> : <Loader />}
+        {!isLoading ? <RecordTable key={id} id={id} items={patientData} removePatient={removePatient}/> : <Loader />}
         <br />
         <Link to="/addPatient">
           <Button variant="contained" size="large">

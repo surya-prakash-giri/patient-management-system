@@ -11,7 +11,7 @@ import "./App.css";
 
 function App() {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <Box className="App">
         <Header />
         <Routes>

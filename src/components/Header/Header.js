@@ -1,18 +1,31 @@
 import React from "react";
-import { AppBar, Box, Button, Stack, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MedicationLiquidIcon from "@mui/icons-material/MedicationLiquid";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <AppBar position="static">
         <Toolbar>
-          <Stack
-            spacing={2}
-            direction={"row"}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="logo"
           >
+            <MedicationLiquidIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>PATIENT MANAGEMENT SYSTEM (PMS) </Typography>
+          <Stack spacing={2} direction={"row"}>
             <Button
               color="inherit"
               onClick={() => navigate("/", { replace: true })}
@@ -28,6 +41,5 @@ export const Header = () => {
           </Stack>
         </Toolbar>
       </AppBar>
-    </Box>
   );
 };
