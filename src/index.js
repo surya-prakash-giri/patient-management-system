@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 
-// // config.js
+// config.js
 // import dotenv from "dotenv";
 // dotenv.config();
 

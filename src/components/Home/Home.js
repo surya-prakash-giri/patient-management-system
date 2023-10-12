@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import RecordTable from "./RecordTable";
 import Loader from "../Progress/Loader";
+import Toast from "../utils/Toast";
 
 export const Home = () => {
   // constants
@@ -17,6 +18,9 @@ export const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const [reload, doReload] = useState(false);
   const id = useId();
+
+  const toastRef = useRef();
+  const duration = 1000;
 
   useEffect(() => {
     // Use an async function for cleaner code
@@ -34,31 +38,49 @@ export const Home = () => {
     fetchData();
   }, [PATIENT_URL, reload]);
 
-  const removePatient = async(patientId) => {
+  const removePatient = async (patientId) => {
     try {
       const { data } = await axios.delete(`${PATIENT_URL}/${patientId}`);
-      doReload(true);
-      console.log('Deleted Data', data);
+      toastRef.current.openToast();
+      setTimeout(() => doReload(true), duration);
+      console.log("Deleted Data", data);
     } catch (error) {
       console.error("Error fetching patient data:", error);
       setLoading(false);
     }
-  }
+  };
 
   return (
-    <Paper sx={{padding: '32px'}}>
-      <Box sx={{ width: "100%", maxWidth: 'lg' }}>
-        <Typography variant="h2" gutterBottom>
-          Patients
-        </Typography>
-        {!isLoading ? <RecordTable key={id} id={id} items={patientData} removePatient={removePatient}/> : <Loader />}
-        <br />
-        <Link to="/addPatient">
-          <Button variant="contained" size="large">
-            Register Patient
-          </Button>
-        </Link>
-      </Box>
-    </Paper>
+    <>
+      <Paper sx={{ padding: "32px" }}>
+        <Box sx={{ width: "100%", maxWidth: "lg" }}>
+          <Typography variant="h2" gutterBottom>
+            Patients
+          </Typography>
+          {!isLoading ? (
+            <RecordTable
+              key={id}
+              id={id}
+              items={patientData}
+              removePatient={removePatient}
+            />
+          ) : (
+            <Loader />
+          )}
+          <br />
+          <Link to="/addPatient">
+            <Button variant="contained" size="large">
+              Register Patient
+            </Button>
+          </Link>
+        </Box>
+      </Paper>
+      <Toast
+        ref={toastRef}
+        severity="error"
+        message="Patient Deleted Successfully!"
+        duration={duration}
+      ></Toast>
+    </>
   );
 };

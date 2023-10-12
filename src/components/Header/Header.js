@@ -24,7 +24,7 @@ export const Header = () => {
           >
             <MedicationLiquidIcon />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>PATIENT MANAGEMENT SYSTEM (PMS) </Typography>
+          <Typography variant="h6" sx={{ display: 'flex', flexGrow: 1 }}>PATIENT MANAGEMENT SYSTEM (PMS) </Typography>
           <Stack spacing={2} direction={"row"}>
             <Button
               color="inherit"
